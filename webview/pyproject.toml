@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = ["jd-solanki <jdsolanki0001@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12"
+pywebview = "^4.4"
+pyinstaller = "^6.1.0"
+
+
+[tool.poetry.group.dev.dependencies]
+taskipy = "^1.12.0"
+mypy = "^1.6.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+dev = "python app/main.py"
+build = "poetry run task clean && pushd ../ui && pnpm build && popd && pyinstaller --noconsole --onefile --windowed app/main.py"
+clean = "rm -rf build dist"
