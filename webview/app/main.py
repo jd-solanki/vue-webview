@@ -1,6 +1,10 @@
 import os
+import pathlib
 
 import webview
+
+curr_dir = pathlib.Path(__file__).parent.resolve()
+ui_dir = curr_dir.parent.parent / "ui"
 
 
 class Api:
