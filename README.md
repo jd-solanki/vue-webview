@@ -5,18 +5,16 @@
 ```bash
 # Installation
 pushd ui && npm i && popd
-cd webview && poetry install
+cd webview
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
 
 # Development
-## Terminal 1:
-cd ui && npm run dev
-
-## Terminal 2:
-cd webview && poetry run task dev
+python app/main.py
 
 # Build
-cd webview && poetry run task build
+rm -rf build dist && pushd ../ui && npm run build-only && popd && pyinstaller --noconsole --onefile --windowed app/main.py
 
 # Test build
-cd webview && ./dist/main
+./dist/main
 ```

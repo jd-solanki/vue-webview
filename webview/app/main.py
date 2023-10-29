@@ -11,19 +11,19 @@ def get_entrypoint():
     def exists(path: str):
         return os.path.exists(os.path.join(os.path.dirname(__file__), path))
 
-    if exists("./ui/index.html"):  # unfrozen development
+    if exists("./ui/index.html"):
         return "./ui/index.html"
 
-    if exists("../ui/index.html"):  # unfrozen development
+    if exists("../ui/index.html"):
         return "../ui/index.html"
 
-    if exists("../../ui/index.html"):  # unfrozen development
+    if exists("../../ui/index.html"):
         return "../../ui/index.html"
 
-    if exists("../../../ui/index.html"):  # unfrozen development
+    if exists("../../../ui/index.html"):
         return "../../../ui/index.html"
 
-    if exists("../../../../ui/index.html"):  # unfrozen development
+    if exists("../../../../ui/index.html"):
         return "../../../../ui/index.html"
 
     raise Exception("No index.html found")
