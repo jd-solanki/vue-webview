@@ -1,6 +1,15 @@
 import os
+import pathlib
+
+import bottle
+from bottle import static_file
 
 import webview
+
+curr_dir = pathlib.Path(__file__).parent.resolve()
+ui_dir = curr_dir.parent.parent / "ui"
+
+print(f"ui_dir: {ui_dir}")
 
 
 class Api:
@@ -31,13 +40,23 @@ def get_entrypoint():
 
 entry = get_entrypoint()
 
+# @app.route('/static/<filename:path>')
+# def serve_static(filename):
+#     return static_file(filename, root='./static')  # Adjust the root path as needed
 
-if __name__ == "__main__":
-    window = webview.create_window(
-        "pywebview-vue",
-        url=entry,
-        # url="http://localhost:5173",
-        js_api=Api(),
-        frameless=True,
-    )
-    webview.start(debug=True)
+
+app = bottle.Bottle()
+
+
+# @app.route("/static/<filename:path>")
+# def serve_static(filename):
+#     return static_file(filename, root="./static")  # Adjust the root path as needed
+
+
+@app.route("/<path:path>")
+def catch_all(path):
+    return static_file("index.html", root=ui_dir)
+
+
+webview.create_window("Window", url=app)
+webview.start(debug=True)
