@@ -13,7 +13,7 @@ pip install -r requirements.txt
 python app/main.py
 
 # Build
-rm -rf build dist && pushd ../ui && npm run build-only && popd && pyinstaller --noconsole --onefile --windowed app/main.py
+rm -rf build dist && pushd ../ui && npm run build-only && popd && pyinstaller main.spec
 
 # Test build
 ./dist/main
